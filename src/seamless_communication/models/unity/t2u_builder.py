@@ -37,18 +37,18 @@ from fairseq2.nn.transformer import (
 from fairseq2.typing import DataType, Device
 from torch.nn import GELU, ReLU
 
-from .models.unity.char_tokenizer import load_unity_char_tokenizer
-from .models.unity.fft_decoder import FeedForwardTransformer
-from .models.unity.fft_decoder_layer import (
+from seamless_communication.models.unity.char_tokenizer import load_unity_char_tokenizer
+from seamless_communication.models.unity.fft_decoder import FeedForwardTransformer
+from seamless_communication.models.unity.fft_decoder_layer import (
     Conv1dBlock,
     FeedForwardTransformerLayer,
 )
-from .models.unity.length_regulator import (
+from seamless_communication.models.unity.length_regulator import (
     VarianceAdaptor,
     VariancePredictor,
 )
-from .models.unity.model import UnitYNART2UModel, UnitYT2UModel
-from .models.unity.nar_decoder_frontend import NARDecoderFrontend
+from seamless_communication.models.unity.model import UnitYNART2UModel, UnitYT2UModel
+from seamless_communication.models.unity.nar_decoder_frontend import NARDecoderFrontend
 
 
 @dataclass

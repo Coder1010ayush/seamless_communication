@@ -8,7 +8,7 @@ import logging
 
 import torch
 
-from .models.unit_extractor import UnitExtractor
+from seamless_communication.models.unit_extractor import UnitExtractor
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

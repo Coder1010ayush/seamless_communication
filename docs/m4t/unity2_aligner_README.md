@@ -15,7 +15,7 @@ For large-scale alignment extraction offline unit extraction is preferred. Refer
 **Alignment extractor initialization:**
 
 ```python
-from.models.aligner.alignment_extractor import AlignmentExtractor
+from seamless_communication.models.aligner.alignment_extractor import AlignmentExtractor
 from fairseq2.typing import Device
 import torch
 

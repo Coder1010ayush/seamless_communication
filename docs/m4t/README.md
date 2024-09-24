@@ -75,7 +75,7 @@ and a vocoder:
 
 ```python
 import torch
-from.inference import Translator
+from seamless_communication.inference import Translator
 
 
 # Initialize a Translator object with a multitask model, vocoder on the GPU.

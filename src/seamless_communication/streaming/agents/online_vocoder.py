@@ -4,17 +4,17 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 from __future__ import annotations
-from simuleval.data.segments import SpeechSegment
-from simuleval.agents.actions import ReadAction, WriteAction
-from simuleval.agents import TextToSpeechAgent
 
 import logging
 from argparse import ArgumentParser, Namespace
 from typing import Any, Dict
 
 import torch
-from .models.vocoder.loader import load_vocoder_model
-from .streaming.agents.common import AgentStates
+from seamless_communication.models.vocoder.loader import load_vocoder_model
+from seamless_communication.streaming.agents.common import AgentStates
+from simuleval.agents import TextToSpeechAgent
+from simuleval.agents.actions import ReadAction, WriteAction
+from simuleval.data.segments import SpeechSegment
 
 logging.basicConfig(
     level=logging.INFO,

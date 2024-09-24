@@ -47,8 +47,8 @@ UNITY_SMALLER_MODELS = [
 
 NLLB_2_UNITY_KEYMAP = {
     r"^encoder_frontend\.": r"text_encoder_frontend.",
-    r"^encoder\.": r"text_encoder.",
-    r"^decoder\.": r"text_decoder.",
+    r"^encoder\."         : r"text_encoder.",
+    r"^decoder\."         : r"text_decoder.",
     r"^decoder_frontend\.": r"text_decoder_frontend.",
 }
 
@@ -172,7 +172,7 @@ def convert_state_dict(
 
     if key_map is None:
         return state_dict
-
+    
     state_dict = convert_model_state_dict(state_dict, key_map=key_map)
 
     # We use the built-in version attribute of `torch.nn.Module`.
@@ -201,9 +201,9 @@ def convert_unity_model(
     model_name: str,
     hparams: Optional[Dict[str, Any]] = None,
 ):
-    from .models import unity
-    from .models.unity.builder import UnitYConfig, create_unity_model
-    from .models.unity.model import UnitYModel
+    from seamless_communication.models import unity
+    from seamless_communication.models.unity.builder import UnitYConfig, create_unity_model
+    from seamless_communication.models.unity.model import UnitYModel
 
     load_unity_model_without_conversion = ModelLoader[UnitYModel, UnitYConfig](
         asset_store,
@@ -256,7 +256,7 @@ def convert_bitext_model(
     model_name: str,
     hparams: Optional[Dict[str, Any]] = None,
 ):
-    from mt import load_mt_model, load_vocab  # , test_mt
+    from mt import load_mt_model, load_vocab  #, test_mt
 
     hparams = hparams or {}
     hparams["multilingual"] = False
@@ -323,7 +323,7 @@ def convert_model(
             elif model_type == ModelType.MTS:
                 # TODO: implement the EdgeML model conversion here
                 raise NotImplementedError("Scripted model conversion not implemented yet")
-
+            
             # Bilingual non-scripted model
             else:
                 model, hparams, vocab, tgt_vocab = convert_bitext_model(model_name, hparams=hparams)

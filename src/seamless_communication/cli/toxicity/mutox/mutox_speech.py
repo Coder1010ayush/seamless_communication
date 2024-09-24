@@ -4,7 +4,6 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
-import logging
 import argparse
 
 import torch
@@ -14,10 +13,11 @@ from pathlib import Path
 from sonar.inference_pipelines.speech import (
     SpeechInferenceParams,
 )
-from .toxicity.mutox.speech_pipeline import (
+from seamless_communication.toxicity.mutox.speech_pipeline import (
     MutoxSpeechClassifierPipeline,
 )
 
+import logging
 
 logging.basicConfig(
     level=logging.INFO,

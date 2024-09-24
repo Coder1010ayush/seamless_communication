@@ -4,14 +4,14 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
-import logging
-from sonar.inference_pipelines.text import TextToEmbeddingModelPipeline
 import argparse
 import sys
 
 import torch
-from .toxicity.mutox.loader import load_mutox_model
+from seamless_communication.toxicity.mutox.loader import load_mutox_model
+from sonar.inference_pipelines.text import TextToEmbeddingModelPipeline
 
+import logging
 
 logging.basicConfig(
     level=logging.INFO,

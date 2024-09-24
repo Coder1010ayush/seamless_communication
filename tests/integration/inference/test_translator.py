@@ -4,10 +4,10 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
-from tests.common import device, get_default_dtype
 from typing import Final
 
-from .inference import Translator
+from seamless_communication.inference import Translator
+from tests.common import device, get_default_dtype
 
 # fmt: off
 ENG_SENTENCE:     Final = "On Monday, scientists from the Stanford University School of Medicine announced the invention of a new diagnostic tool that can sort cells by type: a tiny printable chip that can be manufactured using standard inkjet printers for possibly about one U.S. cent each."

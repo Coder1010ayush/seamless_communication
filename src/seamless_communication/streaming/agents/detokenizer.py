@@ -4,20 +4,20 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 from __future__ import annotations
-from simuleval.data.segments import Segment, EmptySegment
 
 from argparse import ArgumentParser, Namespace
 from typing import Any, Dict
 
 from simuleval.agents import TextToTextAgent
 from simuleval.agents.actions import Action, ReadAction, WriteAction
-from .streaming.agents.common import (
+from seamless_communication.streaming.agents.common import (
     AgentStates,
     NoUpdateTargetMixin,
 )
-from .streaming.agents.online_text_decoder import (
+from seamless_communication.streaming.agents.online_text_decoder import (
     UnitYTextDecoderOutput,
 )
+from simuleval.data.segments import Segment, EmptySegment
 
 
 class DetokenizerAgent(NoUpdateTargetMixin, TextToTextAgent):  # type: ignore

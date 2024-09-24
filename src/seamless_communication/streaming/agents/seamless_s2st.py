@@ -5,27 +5,27 @@
 # MIT_LICENSE file in the root directory of this source tree.
 
 
-from .streaming.agents.detokenizer import UnitYDetokenizerAgent
-from .streaming.agents.offline_w2v_bert_encoder import (
+from seamless_communication.streaming.agents.detokenizer import UnitYDetokenizerAgent
+from seamless_communication.streaming.agents.offline_w2v_bert_encoder import (
     OfflineWav2VecBertEncoderAgent,
 )
-from .streaming.agents.online_feature_extractor import (
+from seamless_communication.streaming.agents.online_feature_extractor import (
     OnlineFeatureExtractorAgent,
 )
-from .streaming.agents.online_text_decoder import (
+from seamless_communication.streaming.agents.online_text_decoder import (
     UnitYMMATextDecoderAgent,
 )
-from .streaming.agents.online_unit_decoder import (
+from seamless_communication.streaming.agents.online_unit_decoder import (
     NARUnitYUnitDecoderAgent,
 )
-from .streaming.agents.pretssel_vocoder import (
+from seamless_communication.streaming.agents.pretssel_vocoder import (
     PretsselVocoderAgent,
 )
-from .streaming.agents.dual_vocoder_agent import (
+from seamless_communication.streaming.agents.dual_vocoder_agent import (
     DualVocoderAgent,
 )
-from .streaming.agents.silero_vad import SileroVADAgent
-from .streaming.agents.unity_pipeline import (
+from seamless_communication.streaming.agents.silero_vad import SileroVADAgent
+from seamless_communication.streaming.agents.unity_pipeline import (
     UnitYAgentPipeline,
     UnitYAgentTreePipeline,
 )

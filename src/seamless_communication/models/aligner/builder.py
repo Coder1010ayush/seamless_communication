@@ -14,13 +14,13 @@ from fairseq2.models.utils.arch_registry import ArchitectureRegistry
 from fairseq2.nn.embedding import StandardEmbedding, init_scaled_embedding
 from fairseq2.typing import DataType, Device
 
-from .models.aligner.model import (
+from seamless_communication.models.aligner.model import (
     UnitY2AlignmentEncoder,
     UnitY2AlignmentFrontend,
     UnitY2AlignmentModel,
 )
-from .models.unity.char_tokenizer import load_unity_char_tokenizer
-from .models.unity.loader import load_unity_unit_tokenizer
+from seamless_communication.models.unity.char_tokenizer import load_unity_char_tokenizer
+from seamless_communication.models.unity.loader import load_unity_unit_tokenizer
 
 
 @dataclass

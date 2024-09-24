@@ -11,8 +11,8 @@ from pathlib import Path
 
 import torch
 
-from cli.m4t.finetune import dataloader, dist_utils, trainer
-from models.unity import (
+from seamless_communication.cli.m4t.finetune import dataloader, dist_utils, trainer
+from seamless_communication.models.unity import (
     load_unity_model,
     load_unity_text_tokenizer,
     load_unity_unit_tokenizer,
@@ -141,13 +141,13 @@ def init_parser() -> argparse.ArgumentParser:
 
 def main() -> None:
     args = init_parser().parse_args()
-
+    
     dist_utils.init_distributed([logger, trainer.logger])
     float_dtype = torch.float16 if torch.device(args.device).type != "cpu" else torch.bfloat16
-
+    
     text_tokenizer = load_unity_text_tokenizer(args.model_name)
     unit_tokenizer = load_unity_unit_tokenizer(args.model_name)
-
+    
     finetune_params = trainer.FinetuneParams(
         model_name=args.model_name,
         finetune_mode=args.mode,
@@ -163,21 +163,21 @@ def main() -> None:
         eval_steps=args.eval_steps,
         log_steps=args.log_steps,
     )
-
+    
     logger.info(f"Finetune Params: {finetune_params}")
-
+    
     model = load_unity_model(args.model_name, device=torch.device("cpu"), dtype=torch.float32)
     assert model.target_vocab_info == text_tokenizer.vocab_info
-
+    
     if (
         finetune_params.finetune_mode == trainer.FinetuneMode.SPEECH_TO_TEXT
         and model.t2u_model is not None
     ):
         model.t2u_model = None
-
+    
     if model.text_encoder is not None:
         model.text_encoder = None
-
+    
     # Put model on selected device
     model = model.to(finetune_params.device)
 
@@ -194,7 +194,7 @@ def main() -> None:
         ),
         dataset_manifest_path=args.train_dataset,
         max_src_tokens_per_batch=args.max_src_tokens)
-
+    
     eval_dataloader = dataloader.UnitYDataLoader(
         text_tokenizer=text_tokenizer,
         unit_tokenizer=unit_tokenizer,
@@ -206,14 +206,14 @@ def main() -> None:
             float_dtype=finetune_params.float_dtype,
         ),
         dataset_manifest_path=args.eval_dataset)
-
+    
     finetune = trainer.UnitYFinetune(
         model=model,
         params=finetune_params,
         train_data_loader=train_dataloader,
         eval_data_loader=eval_dataloader,
         freeze_modules=args.freeze_layers)
-
+    
     finetune.run()
 
 

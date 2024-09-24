@@ -16,11 +16,11 @@ from tqdm import tqdm
 import torch
 
 from datasets import load_dataset
-from .datasets.huggingface import (
+from seamless_communication.datasets.huggingface import (
     Speech2SpeechFleursDatasetBuilder,
     SpeechTokenizer,
 )
-from .models.unit_extractor import UnitExtractor
+from seamless_communication.models.unit_extractor import UnitExtractor
 
 logging.basicConfig(
     level=logging.INFO,
@@ -165,18 +165,18 @@ def download_gigaspeech(subset: str, huggingface_token: str, save_directory: str
         with open(manifest_path, "w") as f:
             for sample in tqdm(ds[split]):
                 f.write(json.dumps({
-                    "source": {
-                        "id": sample["segment_id"],
-                        "text": sample["text"],
-                        "lang": "eng",
-                        "audio_local_path": sample["audio"]["path"],
-                        "sampling_rate": sample["audio"]["sampling_rate"],
-                    },
-                    "target": {
-                        "id": sample["segment_id"],
-                        "text": sample["text"],
-                        "lang": "eng",
-                    }
+                "source": {
+                    "id": sample["segment_id"],
+                    "text": sample["text"],
+                    "lang":"eng",
+                    "audio_local_path": sample["audio"]["path"],
+                    "sampling_rate": sample["audio"]["sampling_rate"],
+                },
+                "target": {
+                    "id": sample["segment_id"],
+                    "text": sample["text"],
+                    "lang": "eng",
+                }
                 }) + "\n")
         logger.info(f"Manifest for GigaSpeech-{subset}-{split} saved to: {manifest_path}")
 

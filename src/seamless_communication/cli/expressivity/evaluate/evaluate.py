@@ -25,23 +25,23 @@ from fairseq2.typing import DataType, Device
 from torch import Tensor
 from tqdm import tqdm
 
-from .cli.expressivity.predict.pretssel_generator import (
+from seamless_communication.cli.expressivity.predict.pretssel_generator import (
     PretsselGenerator,
 )
-from .cli.m4t.evaluate.evaluate import (
+from seamless_communication.cli.m4t.evaluate.evaluate import (
     adjust_output_for_corrupted_inputs,
     count_lines,
 )
-from .cli.m4t.predict import (
+from seamless_communication.cli.m4t.predict import (
     add_inference_arguments,
     set_generation_opts,
 )
-from .inference import BatchedSpeechOutput, Translator
-from .models.unity import (
+from seamless_communication.inference import BatchedSpeechOutput, Translator
+from seamless_communication.models.unity import (
     load_gcmvn_stats,
     load_unity_unit_tokenizer,
 )
-from .store import add_gated_assets
+from seamless_communication.store import add_gated_assets
 
 logging.basicConfig(
     level=logging.INFO,

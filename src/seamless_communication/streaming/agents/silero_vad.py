@@ -4,9 +4,6 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 from __future__ import annotations
-from simuleval.data.segments import EmptySegment, Segment, SpeechSegment
-from simuleval.agents.actions import Action, ReadAction, WriteAction
-from simuleval.agents import SpeechToSpeechAgent
 
 import logging
 from pathlib import Path
@@ -20,10 +17,13 @@ from typing import Any, List, Optional, Union
 import numpy as np
 import torch
 import soundfile
-from .streaming.agents.common import (
+from seamless_communication.streaming.agents.common import (
     AgentStates,
     EarlyStoppingMixin,
 )
+from simuleval.agents import SpeechToSpeechAgent
+from simuleval.agents.actions import Action, ReadAction, WriteAction
+from simuleval.data.segments import EmptySegment, Segment, SpeechSegment
 
 logging.basicConfig(
     level=logging.INFO,
@@ -100,7 +100,7 @@ class SileroVADStates(EarlyStoppingMixin, AgentStates):  # type: ignore
         speech_probs = []
         # TODO: run self.model in batch?
         for i in range(0, len(t), self.window_size_samples):
-            chunk = t[i: i + self.window_size_samples]
+            chunk = t[i : i + self.window_size_samples]
             if len(chunk) < self.window_size_samples:
                 break
             speech_prob = self.model(chunk, self.sample_rate).item()

@@ -12,7 +12,7 @@ import torch
 import torchaudio
 from huggingface_hub import hf_hub_download
 
-from .models.inference.translator import Translator
+from seamless_communication.models.inference.translator import Translator
 
 DESCRIPTION = """# SeamlessM4T
 

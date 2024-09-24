@@ -4,14 +4,14 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
-from fairseq2.typing import DataType, Device
-from torch import nn
-import torch
 import typing as tp
-from .toxicity.mutox.classifier import (
+from seamless_communication.toxicity.mutox.classifier import (
     MutoxClassifier,
     MutoxConfig,
 )
+import torch
+from torch import nn
+from fairseq2.typing import DataType, Device
 
 
 class MutoxClassifierBuilder:

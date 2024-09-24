@@ -20,11 +20,11 @@ from fairseq2.nn.padding import get_seqs_and_padding_mask
 from fairseq2.typing import DataType, Device
 from torch import Tensor, nn
 
-from .models.unit_extractor.kmeans import KmeansModel
-from .models.unit_extractor.wav2vec2_layer_output import (
+from seamless_communication.models.unit_extractor.kmeans import KmeansModel
+from seamless_communication.models.unit_extractor.wav2vec2_layer_output import (
     Wav2Vec2LayerOutputModel,
 )
-from .models.vocoder import Vocoder, load_vocoder_model
+from seamless_communication.models.vocoder import Vocoder, load_vocoder_model
 
 logging.basicConfig(
     level=logging.INFO,

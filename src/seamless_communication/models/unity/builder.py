@@ -27,23 +27,23 @@ from fairseq2.nn.transformer import (
 from fairseq2.typing import DataType, Device, override
 from torch.nn import GELU, ReLU
 
-from .models.conformer_shaw import (
+from seamless_communication.models.conformer_shaw import (
     ConformerShawEncoderBuilder,
     ConformerShawEncoderConfig,
     conformer_shaw_archs,
 )
-from .models.generator.ecapa_tdnn_builder import (
+from seamless_communication.models.generator.ecapa_tdnn_builder import (
     EcapaTDNNBuilder,
     EcapaTDNNConfig,
     ecapa_tdnn_archs,
 )
-from .models.unity.adaptor_block import (
+from seamless_communication.models.unity.adaptor_block import (
     UnitYConformerAdaptorLayer,
     UnitYEncoderAdaptor,
     UnitYTransformerAdaptorLayer,
 )
-from .models.unity.model import UnitYModel
-from .models.unity.t2u_builder import (
+from seamless_communication.models.unity.model import UnitYModel
+from seamless_communication.models.unity.t2u_builder import (
     UnitYNART2UBuilder,
     UnitYT2UBuilder,
     UnitYT2UConfig,

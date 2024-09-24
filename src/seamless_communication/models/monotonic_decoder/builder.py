@@ -26,14 +26,14 @@ from fairseq2.nn.transformer import (
 )
 from fairseq2.typing import DataType, Device
 
-from .models.monotonic_decoder.model import MonotonicDecoderModel
-from .models.monotonic_decoder.monotonic_decoder import (
+from seamless_communication.models.monotonic_decoder.model import MonotonicDecoderModel
+from seamless_communication.models.monotonic_decoder.monotonic_decoder import (
     MonotonicTransformerDecoder,
 )
-from .models.monotonic_decoder.monotonic_decoder_layer import (
+from seamless_communication.models.monotonic_decoder.monotonic_decoder_layer import (
     MonotonicTransformerDecoderLayer,
 )
-from .models.monotonic_decoder.p_choose import PChooseLayer
+from seamless_communication.models.monotonic_decoder.p_choose import PChooseLayer
 
 
 @dataclass

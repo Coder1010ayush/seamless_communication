@@ -26,14 +26,14 @@ from fairseq2.typing import DataType, Device
 from scipy.signal import medfilt2d
 from torch import Tensor
 
-from .denoise.demucs import Demucs, DenoisingConfig
-from .models.tokenizer import SPMTokenizer
-from .models.unity import (
+from seamless_communication.denoise.demucs import Demucs, DenoisingConfig
+from seamless_communication.models.tokenizer import SPMTokenizer
+from seamless_communication.models.unity import (
     UnitYX2TModel,
     load_unity_model,
     load_unity_text_tokenizer,
 )
-from .segment.silero_vad import SileroVADSegmenter
+from seamless_communication.segment.silero_vad import SileroVADSegmenter
 
 
 class EncDecAttentionsCollect(AttentionWeightHook):
