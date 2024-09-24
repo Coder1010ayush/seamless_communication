@@ -43,13 +43,13 @@ class FinetuneMode(Enum):
 class FinetuneParams:
     model_name: str
     """Model name of model being finetuned."""
-    
+
     save_model_path: Path
     """Path were to save finetuned model."""
 
     finetune_mode: FinetuneMode = FinetuneMode.TEXT_TO_SPEECH
     """Allows to freeze S2T or T2U part of the model"""
-    
+
     float_dtype: torch.dtype = torch.float16
     """Float Dtype"""
 
@@ -259,14 +259,14 @@ class UnitYFinetune:
             if model.t2u_model is not None
             else None,
         )
-        
+
         self.model = self._wrap_model_for_trainining(model=model)
         if freeze_modules:
             self._freeze_modules(freeze_modules)
-        
+
         self.train_data_loader = train_data_loader
         self.eval_data_loader = eval_data_loader
-        
+
         self.grad_scaler = torch.cuda.amp.GradScaler()  # type: ignore
         self.optimizer = AdamW(
             params=self.model.parameters(),
@@ -311,7 +311,7 @@ class UnitYFinetune:
             device_ids=[dist_utils.get_local_rank()],
             find_unused_parameters=find_unused,
         )
-        
+
     def _freeze_modules(self, frozen_modules: List[str] = []) -> None:
         for icecube in frozen_modules:
             for (name, module) in self.model.named_modules():
@@ -376,17 +376,17 @@ class UnitYFinetune:
         self.optimizer.zero_grad()
         with torch.autocast(device_type=self.params.device.type, dtype=self.params.float_dtype):
             tokens, units = self.model(batch)
-        
+
         loss = self.calc_loss(batch, tokens, units)
         if loss.isnan().any().item():
             logger.error(batch.speech_to_text)
             raise RuntimeError("Train loss is NaN! Something is wrong in the model!")
-        
+
         self.grad_scaler.scale(loss).backward()
         self.grad_scaler.step(self.optimizer)
         self.grad_scaler.update()
         self.lr_scheduler.step()
-        
+
         assert batch.speech_to_text.src_tokens is not None
         self.train_loss_hist.update(1, loss.item())
         self._train_step_log()
@@ -409,22 +409,22 @@ class UnitYFinetune:
         logger.info("Start Finetuning")
         self._reset_stats()
         self._eval_model(n_batches=100)
-        
+
         train_dataloader = self.train_data_loader.get_dataloader()
-        
+
         while self.epoch_idx < self.params.max_epochs and self.patience_left:
             for train_batch in tqdm(train_dataloader, desc="Training Steps"):
                 # Run batch through train step
                 self._train_step(train_batch)
-                
+
                 # Perform eval if its time to eval
                 if not self.update_idx or self.update_idx % self.params.eval_steps != 0:
                     continue
-                
+
                 # Clear GPU memory for eval
                 torch.cuda.empty_cache()
                 self._eval_model(n_batches=100)
-                    
+
                 # Save the current model if its the best we've ever had
                 if self.is_best_state:
                     self._save_model()
@@ -435,5 +435,5 @@ class UnitYFinetune:
                         f"over last {no_improve_steps} updates"
                     )
                     break
-                
+
             self.epoch_idx += 1
