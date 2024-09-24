@@ -14,7 +14,7 @@ from fairseq2.typing import DataType, Device, finaloverride
 from torch import Tensor
 from torch.nn import Module
 
-from .models.unity.fft_decoder_layer import (
+from seamless_communication.models.unity.fft_decoder_layer import (
     FeedForwardTransformerLayer,
 )
 

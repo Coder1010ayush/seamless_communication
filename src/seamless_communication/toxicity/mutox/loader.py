@@ -5,15 +5,16 @@
 # MIT_LICENSE file in the root directory of this source tree.
 
 
-import typing as tp
 from fairseq2.assets import asset_store, download_manager
 from fairseq2.models.utils import ConfigLoader, ModelLoader
-from .toxicity.mutox.builder import create_mutox_model
-from .toxicity.mutox.classifier import (
+from seamless_communication.toxicity.mutox.builder import create_mutox_model
+from seamless_communication.toxicity.mutox.classifier import (
     MutoxClassifier,
     MutoxConfig,
     mutox_archs,
 )
+
+import typing as tp
 
 
 @mutox_archs.decorator("mutox")

@@ -4,14 +4,14 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
-from tests.common import assert_equal, device, get_default_dtype
 from typing import Final
 
 import torch
 from torch import tensor
 
 from fairseq2.data.audio import AudioDecoderOutput
-from .models.aligner.alignment_extractor import AlignmentExtractor
+from seamless_communication.models.aligner.alignment_extractor import AlignmentExtractor
+from tests.common import assert_equal, device, get_default_dtype
 
 
 REF_TEXT = "the examination and testimony of the experts enabled the commision to conclude that five shots may have been fired"

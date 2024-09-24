@@ -25,12 +25,12 @@ from fairseq2.nn.padding import (
 from fairseq2.nn.utils.module import infer_device
 from torch import Tensor
 
-from .models.unity.model import (
+from seamless_communication.models.unity.model import (
     UnitYModel,
     UnitYT2UModel,
     UnitYX2TModel,
 )
-from .models.unity.unit_tokenizer import (
+from seamless_communication.models.unity.unit_tokenizer import (
     UnitTokenDecoder,
     UnitTokenizer,
 )
@@ -48,7 +48,7 @@ def remove_consecutive_repeated_ngrams(
     start = 0
     while start < len(sequence):
         for k in range(max_size, min_size - 1, -1):
-            if sequence[start: start + k] == sequence[start + k: start + k + k]:
+            if sequence[start : start + k] == sequence[start + k : start + k + k]:
                 drop_idx |= set(range(start, start + k))
                 start += k - 1  # assumes repeating subsequences don't overlap
                 break

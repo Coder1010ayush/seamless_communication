@@ -21,11 +21,11 @@ from fairseq2.nn.padding import PaddingMask, get_seqs_and_padding_mask
 from fairseq2.typing import DataType, Device
 from torch import Tensor
 
-from .inference.generator import (
+from seamless_communication.inference.generator import (
     SequenceGeneratorOptions,
     UnitYGenerator,
 )
-from .models.unity import (
+from seamless_communication.models.unity import (
     UnitTokenizer,
     UnitYModel,
     UnitYNART2UModel,
@@ -35,12 +35,12 @@ from .models.unity import (
     load_unity_unit_tokenizer,
     unity_archs,
 )
-from .models.vocoder import load_vocoder_model
-from .toxicity import (
+from seamless_communication.models.vocoder import load_vocoder_model
+from seamless_communication.toxicity import (
     ETOXBadWordChecker,
     load_etox_bad_word_checker,
 )
-from .toxicity.mintox import mintox_pipeline
+from seamless_communication.toxicity.mintox import mintox_pipeline
 
 logging.basicConfig(
     level=logging.INFO,

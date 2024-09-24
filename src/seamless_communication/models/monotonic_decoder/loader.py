@@ -11,12 +11,12 @@ from fairseq2.assets import asset_store, download_manager
 from fairseq2.models.utils import ConfigLoader, ModelLoader
 from fairseq2.models.utils.checkpoint import convert_fairseq_checkpoint
 
-from .models.monotonic_decoder.builder import (
+from seamless_communication.models.monotonic_decoder.builder import (
     MonotonicDecoderConfig,
     create_monotonic_decoder_model,
     monotonic_decoder_archs,
 )
-from .models.monotonic_decoder.model import MonotonicDecoderModel
+from seamless_communication.models.monotonic_decoder.model import MonotonicDecoderModel
 
 
 def convert_monotonic_checkpoint(

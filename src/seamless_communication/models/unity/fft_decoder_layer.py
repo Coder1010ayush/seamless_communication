@@ -13,7 +13,7 @@ from fairseq2.typing import DataType, Device, finaloverride
 from torch import Tensor
 from torch.nn import Conv1d, Dropout, Module, ReLU
 
-from .models.unity.film import FiLM
+from seamless_communication.models.unity.film import FiLM
 
 
 @final

@@ -14,7 +14,7 @@ from overrides import final as finaloverride
 from torch import Tensor
 from torch.nn import Module
 
-from .models.monotonic_decoder.monotonic_decoder import (
+from seamless_communication.models.monotonic_decoder.monotonic_decoder import (
     MonotonicTransformerDecoder,
 )
 

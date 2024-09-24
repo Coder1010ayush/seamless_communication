@@ -6,15 +6,6 @@
 # MIT_LICENSE file in the root directory of this source tree.
 
 from __future__ import annotations
-from lang_list import (
-    ASR_TARGET_LANGUAGE_NAMES,
-    LANGUAGE_NAME_TO_CODE,
-    S2ST_TARGET_LANGUAGE_NAMES,
-    S2TT_TARGET_LANGUAGE_NAMES,
-    T2ST_TARGET_LANGUAGE_NAMES,
-    T2TT_TARGET_LANGUAGE_NAMES,
-    TEXT_SOURCE_LANGUAGE_NAMES,
-)
 
 import os
 import pathlib
@@ -26,10 +17,19 @@ import torch
 import torchaudio
 from fairseq2.assets import InProcAssetMetadataProvider, asset_store
 from huggingface_hub import snapshot_download
-from .inference import Translator
+from seamless_communication.inference import Translator
 
+from lang_list import (
+    ASR_TARGET_LANGUAGE_NAMES,
+    LANGUAGE_NAME_TO_CODE,
+    S2ST_TARGET_LANGUAGE_NAMES,
+    S2TT_TARGET_LANGUAGE_NAMES,
+    T2ST_TARGET_LANGUAGE_NAMES,
+    T2TT_TARGET_LANGUAGE_NAMES,
+    TEXT_SOURCE_LANGUAGE_NAMES,
+)
 
-user = getpass.getuser()  # this is not portable on windows
+user = getpass.getuser() # this is not portable on windows
 CHECKPOINTS_PATH = pathlib.Path(os.getenv("CHECKPOINTS_PATH", f"/home/{user}/app/models"))
 if not CHECKPOINTS_PATH.exists():
     snapshot_download(repo_id="facebook/seamless-m4t-v2-large", repo_type="model", local_dir=CHECKPOINTS_PATH)

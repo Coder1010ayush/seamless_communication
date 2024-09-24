@@ -4,12 +4,11 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
-from fairseq2.memory import MemoryBlock
-import torch
 import unittest
 from unittest.mock import patch, MagicMock
-from .denoise.demucs import Demucs, DenoisingConfig
-
+from seamless_communication.denoise.demucs import Demucs, DenoisingConfig
+import torch
+from fairseq2.memory import MemoryBlock
 
 class TestDemucs(unittest.TestCase):
     def test_init_works(self):
@@ -35,3 +34,4 @@ class TestDemucs(unittest.TestCase):
         mock_run.assert_called_once()
         mock_load.assert_called_once()
         self.assertIsInstance(result, MemoryBlock)
+        

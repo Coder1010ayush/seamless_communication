@@ -20,7 +20,7 @@ from fairseq2.typing import DataType, Device, finaloverride
 from torch import Tensor
 from torch.nn import Module
 
-from .models.monotonic_decoder.monotonic_decoder_layer import (
+from seamless_communication.models.monotonic_decoder.monotonic_decoder_layer import (
     MonotonicTransformerDecoderLayer,
 )
 

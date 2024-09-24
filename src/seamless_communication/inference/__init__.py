@@ -4,15 +4,15 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
-from .inference.generator import (
+from seamless_communication.inference.generator import (
     SequenceGeneratorOptions as SequenceGeneratorOptions,
 )
-from .inference.generator import UnitYGenerator as UnitYGenerator
-from .inference.translator import (
+from seamless_communication.inference.generator import UnitYGenerator as UnitYGenerator
+from seamless_communication.inference.translator import (
     BatchedSpeechOutput as BatchedSpeechOutput,
 )
-from .inference.translator import Modality as Modality
-from .inference.translator import Task as Task
-from .inference.translator import Translator as Translator
+from seamless_communication.inference.translator import Modality as Modality
+from seamless_communication.inference.translator import Task as Task
+from seamless_communication.inference.translator import Translator as Translator
 
-from .inference.transcriber import Transcriber as Transcriber
+from seamless_communication.inference.transcriber import Transcriber as Transcriber

@@ -4,9 +4,9 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
-from .toxicity.etox_bad_word_checker import (
+from seamless_communication.toxicity.etox_bad_word_checker import (
     ETOXBadWordChecker as ETOXBadWordChecker,
 )
-from .toxicity.etox_bad_word_checker import (
+from seamless_communication.toxicity.etox_bad_word_checker import (
     load_etox_bad_word_checker as load_etox_bad_word_checker,
 )

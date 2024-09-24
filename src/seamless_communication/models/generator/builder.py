@@ -21,26 +21,26 @@ from fairseq2.nn.transformer import (
 from fairseq2.typing import DataType, Device
 from torch.nn import Conv1d
 
-from .models.generator.ecapa_tdnn_builder import (
+from seamless_communication.models.generator.ecapa_tdnn_builder import (
     EcapaTDNNBuilder,
     EcapaTDNNConfig,
     ecapa_tdnn_archs,
 )
-from .models.generator.vocoder import (
+from seamless_communication.models.generator.vocoder import (
     PretsselDecoderFrontend,
     PretsselEncoderFrontend,
     PretsselVocoder,
 )
-from .models.unity.fft_decoder import FeedForwardTransformer
-from .models.unity.fft_decoder_layer import (
+from seamless_communication.models.unity.fft_decoder import FeedForwardTransformer
+from seamless_communication.models.unity.fft_decoder_layer import (
     Conv1dBlock,
     FeedForwardTransformerLayer,
 )
-from .models.unity.length_regulator import (
+from seamless_communication.models.unity.length_regulator import (
     VarianceAdaptor,
     VariancePredictor,
 )
-from .models.unity.t2u_builder import VariancePredictorConfig
+from seamless_communication.models.unity.t2u_builder import VariancePredictorConfig
 
 
 @dataclass

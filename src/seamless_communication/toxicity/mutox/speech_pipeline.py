@@ -4,23 +4,25 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
-from fairseq2.typing import Device
-from sonar.models.encoder_model import SonarEncoderModel
-from typing import Union
-from fairseq2.data import (
-    DataPipelineBuilder,
-)
+import torch
+from seamless_communication.toxicity.mutox.classifier import MutoxClassifier
+from seamless_communication.toxicity.mutox.loader import load_mutox_model
+from sonar.models.sonar_speech.loader import load_sonar_speech_model
+
 from sonar.inference_pipelines.speech import (
     SpeechToEmbeddingPipeline,
     SpeechInferenceParams,
 )
-from sonar.models.sonar_speech.loader import load_sonar_speech_model
-import torch
-from .toxicity.mutox.classifier import MutoxClassifier
-from .toxicity.mutox.loader import load_mutox_model
 
+from fairseq2.data import (
+    DataPipelineBuilder,
+)
 
-from .toxicity.mutox.classifier import MutoxClassifier
+from typing import Union
+
+from seamless_communication.toxicity.mutox.classifier import MutoxClassifier
+from sonar.models.encoder_model import SonarEncoderModel
+from fairseq2.typing import Device
 
 
 CPU_DEVICE = torch.device("cpu")

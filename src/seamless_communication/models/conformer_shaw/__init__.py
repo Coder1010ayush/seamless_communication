@@ -4,18 +4,18 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
-from .models.conformer_shaw.builder import (
+from seamless_communication.models.conformer_shaw.builder import (
     ConformerShawEncoderBuilder as ConformerShawEncoderBuilder,
 )
-from .models.conformer_shaw.builder import (
+from seamless_communication.models.conformer_shaw.builder import (
     ConformerShawEncoderConfig as ConformerShawEncoderConfig,
 )
-from .models.conformer_shaw.builder import (
+from seamless_communication.models.conformer_shaw.builder import (
     conformer_shaw_archs as conformer_shaw_archs,
 )
-from .models.conformer_shaw.builder import (
+from seamless_communication.models.conformer_shaw.builder import (
     create_conformer_shaw_model as create_conformer_shaw_model,
 )
-from .models.conformer_shaw.loader import (
+from seamless_communication.models.conformer_shaw.loader import (
     load_conformer_shaw_model as load_conformer_shaw_model,
 )

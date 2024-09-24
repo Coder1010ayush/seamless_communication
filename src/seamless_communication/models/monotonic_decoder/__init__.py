@@ -3,24 +3,24 @@
 #
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
-from .models.monotonic_decoder.builder import (
+from seamless_communication.models.monotonic_decoder.builder import (
     MonotonicDecoderBuilder as MonotonicDecoderBuilder,
 )
-from .models.monotonic_decoder.builder import (
+from seamless_communication.models.monotonic_decoder.builder import (
     MonotonicDecoderConfig as MonotonicDecoderConfig,
 )
-from .models.monotonic_decoder.model import (
+from seamless_communication.models.monotonic_decoder.model import (
     MonotonicDecoderModel as MonotonicDecoderModel,
 )
-from .models.monotonic_decoder.builder import (
+from seamless_communication.models.monotonic_decoder.builder import (
     create_monotonic_decoder_model as create_monotonic_decoder_model,
 )
-from .models.monotonic_decoder.builder import (
+from seamless_communication.models.monotonic_decoder.builder import (
     monotonic_decoder_archs as monotonic_decoder_archs,
 )
-from .models.monotonic_decoder.loader import (
+from seamless_communication.models.monotonic_decoder.loader import (
     load_monotonic_decoder_config as load_monotonic_decoder_config,
 )
-from .models.monotonic_decoder.loader import (
+from seamless_communication.models.monotonic_decoder.loader import (
     load_monotonic_decoder_model as load_monotonic_decoder_model,
 )

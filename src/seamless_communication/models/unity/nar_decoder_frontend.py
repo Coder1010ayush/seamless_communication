@@ -19,8 +19,8 @@ from fairseq2.typing import DataType, Device, finaloverride
 from torch import Tensor
 from torch.nn import Dropout, Module, Parameter
 
-from .models.unity.char_tokenizer import CharTokenizer
-from .models.unity.length_regulator import (
+from seamless_communication.models.unity.char_tokenizer import CharTokenizer
+from seamless_communication.models.unity.length_regulator import (
     HardUpsampling,
     VarianceAdaptor,
 )
@@ -251,7 +251,7 @@ class NARDecoderFrontend(Module):
                         for ch in list(subword)
                     ]
                 char_seq_len = len(char_ids)
-                char_seqs[b, total: total + char_seq_len] = torch.tensor(char_ids).to(
+                char_seqs[b, total : total + char_seq_len] = torch.tensor(char_ids).to(
                     char_seqs
                 )
                 total += char_seq_len
