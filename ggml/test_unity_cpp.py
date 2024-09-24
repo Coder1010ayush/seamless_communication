@@ -25,8 +25,8 @@ from ggml_convert import convert_model, read_layer_config
 
 import ggml
 from ggml import NativeObj
-from seamless_communication.inference.generator import SequenceGeneratorOptions
-from seamless_communication.inference.translator import Modality, Translator
+from .inference.generator import SequenceGeneratorOptions
+from .inference.translator import Modality, Translator
 
 Ctx = ggml.ggml_context_p
 
@@ -114,6 +114,7 @@ def test_convert_linear(tmp_path: Path) -> None:
         assert (
             ggml.fairseq2_model_layer_config_int(g_module.ptr, bytes(k, "ascii")) == v
         )
+
 
 def test_convert_linear_fp16(tmp_path: Path, ctx: Ctx) -> None:
     pt_model = torch.nn.ModuleDict({"linear": fairseq2.nn.Linear(16, 24, True)})
@@ -297,7 +298,7 @@ def test_MultiheadAttention_forward_self_attn_with_cache(
     with ggml.fairseq2_kv_cache_alloc(g_model, 16 * MB, 2, 21):
         # Incremental decoding
         for t in range(3):
-            xq = x[:, t : t + 1]
+            xq = x[:, t: t + 1]
 
             gxq = ggml.from_numpy(ctx, xq.contiguous())
             ggml.ggml_set_name(gxq, b"xq")
@@ -355,7 +356,7 @@ def test_MultiheadAttention_forward_cross_attn_with_cache(
         gxk = ggml.from_numpy(ctx, xk.contiguous(), name=b"xk")
 
         for t in range(3):
-            xq = x[:, t : t + 1]
+            xq = x[:, t: t + 1]
 
             gxq = ggml.from_numpy(ctx, xq.contiguous())
             ggml.ggml_set_name(gxq, b"xq")
@@ -611,7 +612,7 @@ def test_PositionalEmbedding_forward_with_cache(ctx: Ctx, g_model: c_void_p) -> 
     with ggml.fairseq2_kv_cache_alloc(g_model, 16 * MB, 2, 21):
         # Incremental decoding
         for t in range(20):
-            gseq = ggml.from_numpy(ctx, seq[:, t : t + 1, :].numpy())
+            gseq = ggml.from_numpy(ctx, seq[:, t: t + 1, :].numpy())
             ggml.ggml_set_name(gseq, b"seq")
             gy = ggml.forward(
                 "PositionalEmbedding",
@@ -622,7 +623,7 @@ def test_PositionalEmbedding_forward_with_cache(ctx: Ctx, g_model: c_void_p) -> 
             ggml.build_and_compute(ctx, gy, dump=t == 1)
             y = ggml.to_numpy(gy)
 
-            y_exp = pos_encoder(seq[:, t : t + 1, :], None, state_bag=state_bag).numpy()
+            y_exp = pos_encoder(seq[:, t: t + 1, :], None, state_bag=state_bag).numpy()
             state_bag.increment_step_nr()
             assert y.shape == y_exp.shape
             assert np.allclose(y_exp, y, atol=1e-6)

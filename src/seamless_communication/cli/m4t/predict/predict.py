@@ -13,7 +13,7 @@ import torch
 import torchaudio
 from fairseq2.generation import NGramRepeatBlockProcessor
 
-from seamless_communication.inference import SequenceGeneratorOptions, Translator
+from .inference import SequenceGeneratorOptions, Translator
 
 logging.basicConfig(
     level=logging.INFO,
@@ -25,8 +25,8 @@ logger = logging.getLogger(__name__)
 
 def add_inference_arguments(parser: argparse.ArgumentParser) -> argparse.ArgumentParser:
     parser.add_argument(
-        "--task", 
-        type=str, 
+        "--task",
+        type=str,
         choices=["ASR", "S2ST", "S2TT"],
         help=(
             "* `ASR` -- automatic speech recognition (transcription);"

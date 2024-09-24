@@ -10,8 +10,8 @@ from typing import Any, Dict, List, Optional
 from fairseq2.models.utils.arch_registry import ArchitectureRegistry
 from fairseq2.typing import DataType, Device
 
-from seamless_communication.models.vocoder.codehifigan import CodeGenerator
-from seamless_communication.models.vocoder.vocoder import Vocoder
+from .models.vocoder.codehifigan import CodeGenerator
+from .models.vocoder.vocoder import Vocoder
 
 
 @dataclass

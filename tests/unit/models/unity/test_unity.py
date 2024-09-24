@@ -4,11 +4,11 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
+from tests.common import assert_equal, device
 import pytest
 import torch
 
-from seamless_communication.models.unity import UnitTokenizer
-from tests.common import assert_equal, device
+from .models.unity import UnitTokenizer
 
 
 class TestUnitTokenizer:

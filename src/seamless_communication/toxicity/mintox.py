@@ -4,6 +4,12 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
+from fairseq2.nn.padding import get_seqs_and_padding_mask
+from fairseq2.data import SequenceData
+from fairseq2.typing import Device
+from fairseq2.data.typing import StringLike
+from fairseq2.data.text.text_tokenizer import TextTokenizer
+from fairseq2.generation import BannedSequenceProcessor
 import logging
 from typing import List, Optional, Tuple
 
@@ -12,17 +18,11 @@ import torch
 from torch.nn import functional as F
 
 
-from seamless_communication.inference import SequenceGeneratorOptions
-from seamless_communication.toxicity.etox_bad_word_checker import (
+from .inference import SequenceGeneratorOptions
+from .toxicity.etox_bad_word_checker import (
     ETOXBadWordChecker,
 )
-from fairseq2.generation import BannedSequenceProcessor
-from fairseq2.data.text.text_tokenizer import TextTokenizer
-from fairseq2.data.typing import StringLike
-from fairseq2.typing import Device
-from fairseq2.data import SequenceData
-from fairseq2.nn.padding import get_seqs_and_padding_mask
-from seamless_communication.models.unity import (
+from .models.unity import (
     UnitTokenizer,
     UnitYModel,
 )
@@ -111,7 +111,7 @@ def mintox_pipeline(
     prosody_encoder_input: Optional[SequenceData] = None,
 ) -> Tuple[List[StringLike], Optional[Tensor]]:
     """MinTox: Mitigation at INference time of added TOXicity."""
-    from seamless_communication.inference.translator import Modality, Translator
+    from .inference.translator import Modality, Translator
 
     if text_generation_opts is None:
         text_generation_opts = SequenceGeneratorOptions(

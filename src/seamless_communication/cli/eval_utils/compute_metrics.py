@@ -4,6 +4,9 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
+from whisper.normalizers import BasicTextNormalizer, EnglishTextNormalizer
+from whisper import Whisper
+from tqdm import tqdm
 import json
 import logging
 from pathlib import Path
@@ -16,10 +19,7 @@ from jiwer import cer, wer
 from sacrebleu.metrics.base import Score, Signature
 from sacrebleu.metrics.bleu import BLEU
 from sacrebleu.metrics.chrf import CHRF
-from seamless_communication.cli.eval_utils.lang_mapping import LANG3_LANG2
-from tqdm import tqdm
-from whisper import Whisper
-from whisper.normalizers import BasicTextNormalizer, EnglishTextNormalizer
+from .cli.eval_utils.lang_mapping import LANG3_LANG2
 
 logging.basicConfig(
     level=logging.INFO,

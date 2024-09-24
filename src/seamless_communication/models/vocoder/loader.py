@@ -9,12 +9,12 @@ from typing import Any, Mapping
 from fairseq2.assets import asset_store, download_manager
 from fairseq2.models.utils import ConfigLoader, ModelLoader
 
-from seamless_communication.models.vocoder.builder import (
+from .models.vocoder.builder import (
     VocoderConfig,
     create_vocoder_model,
     vocoder_archs,
 )
-from seamless_communication.models.vocoder.vocoder import Vocoder
+from .models.vocoder.vocoder import Vocoder
 
 
 def convert_vocoder_checkpoint(

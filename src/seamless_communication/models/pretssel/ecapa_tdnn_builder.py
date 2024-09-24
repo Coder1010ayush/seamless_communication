@@ -10,7 +10,7 @@ from typing import List, Optional
 from fairseq2.models.utils.arch_registry import ArchitectureRegistry
 from fairseq2.typing import DataType, Device
 
-from seamless_communication.models.pretssel.ecapa_tdnn import ECAPA_TDNN
+from .models.pretssel.ecapa_tdnn import ECAPA_TDNN
 
 
 @dataclass

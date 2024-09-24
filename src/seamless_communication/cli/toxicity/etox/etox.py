@@ -7,7 +7,7 @@
 import argparse
 import sys
 
-from seamless_communication.toxicity import load_etox_bad_word_checker
+from .toxicity import load_etox_bad_word_checker
 
 
 def main() -> None:

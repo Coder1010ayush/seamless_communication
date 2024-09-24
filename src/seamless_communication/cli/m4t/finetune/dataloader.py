@@ -22,8 +22,8 @@ from torch import Tensor
 from torch.nn.functional import pad as pad_tensor
 from torch.utils.data import DataLoader
 
-from seamless_communication.datasets.datatypes import LangPairSample
-from seamless_communication.models.unity.unit_tokenizer import (
+from .datasets.datatypes import LangPairSample
+from .models.unity.unit_tokenizer import (
     UnitTokenEncoder,
     UnitTokenizer,
 )
@@ -218,7 +218,7 @@ class UnitYDataLoader:
     def _prepare_batch(self, raw_samples: List[Dict[str, Any]]) -> MultimodalSeqsBatch:
         samples = [LangPairSample.from_json(sample) for sample in raw_samples]
         # input speech
-        
+
         #  - filter long audio samples
         filtered_samples = [
             sample for sample in samples if not self._is_long_src_audio(sample)
@@ -244,7 +244,7 @@ class UnitYDataLoader:
         src_lengths = torch.LongTensor(
             [src_tokens.shape[0] for src_tokens in src_tokens_list]
         )
-        
+
         # output text
         text_tokens_list = [
             self._get_tokenized_target_text(sample) for sample in samples

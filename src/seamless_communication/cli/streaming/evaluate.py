@@ -4,23 +4,23 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
+from simuleval.cli import evaluate
 import argparse
 import logging
 
 from fairseq2.assets import asset_store, download_manager
 
-from seamless_communication.cli.streaming.scorers.seamless_quality_scorer import (
+from .cli.streaming.scorers.seamless_quality_scorer import (
     SeamlessQualityScorer as SeamlessQualityScorer,
 )
-from seamless_communication.streaming.agents.seamless_s2st import SeamlessS2STAgent
-from seamless_communication.streaming.agents.seamless_streaming_s2st import (
+from .streaming.agents.seamless_s2st import SeamlessS2STAgent
+from .streaming.agents.seamless_streaming_s2st import (
     SeamlessStreamingS2STAgent,
 )
-from seamless_communication.streaming.agents.seamless_streaming_s2t import (
+from .streaming.agents.seamless_streaming_s2t import (
     SeamlessStreamingS2TAgent,
 )
 
-from simuleval.cli import evaluate
 
 logging.basicConfig(
     level=logging.INFO,

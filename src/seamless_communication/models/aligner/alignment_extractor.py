@@ -15,8 +15,8 @@ from fairseq2.typing import DataType, Device
 from fairseq2.data.typing import StringLike
 from torch import Tensor
 
-from seamless_communication.models.aligner.loader import load_unity2_alignment_model
-from seamless_communication.models.unit_extractor import UnitExtractor
+from .models.aligner.loader import load_unity2_alignment_model
+from .models.unit_extractor import UnitExtractor
 
 try:
     import matplotlib.pyplot as plt

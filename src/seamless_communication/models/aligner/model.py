@@ -18,8 +18,8 @@ from fairseq2.typing import DataType
 from torch import Tensor
 from torch.nn import Module
 
-from seamless_communication.models.unity.char_tokenizer import CharTokenizer
-from seamless_communication.models.unity.unit_tokenizer import UnitTokenizer
+from .models.unity.char_tokenizer import CharTokenizer
+from .models.unity.unit_tokenizer import UnitTokenizer
 
 
 class UnitY2AlignmentFrontend(Module):
@@ -204,7 +204,7 @@ class UnitY2AlignmentEncoder(Module):
                     else:
                         attn_hard_dur[b, t] = feat_lengths[b] - dur_cumsum[b, t - 1]
                     if t < text_lengths[b] - 1:
-                        attn_hard_dur[b, t + 1 :] = 0
+                        attn_hard_dur[b, t + 1:] = 0
                     break
         return attn_hard_dur
 
