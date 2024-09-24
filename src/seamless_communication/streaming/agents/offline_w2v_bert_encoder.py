@@ -4,6 +4,9 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 from __future__ import annotations
+from simuleval.data.segments import SpeechSegment
+from simuleval.agents.actions import Action, ReadAction, WriteAction
+from simuleval.agents import SpeechToSpeechAgent
 
 from argparse import ArgumentParser, Namespace
 from typing import Any, Dict
@@ -14,11 +17,8 @@ from fairseq2.data.data_pipeline import Collater
 from fairseq2.data.text import TextTokenizer
 from fairseq2.models.wav2vec2 import Wav2Vec2EncoderConfig
 from fairseq2.nn.padding import get_seqs_and_padding_mask
-from seamless_communication.models.unity.model import UnitYModel
-from simuleval.agents import SpeechToSpeechAgent
-from simuleval.agents.actions import Action, ReadAction, WriteAction
-from simuleval.data.segments import SpeechSegment
-from seamless_communication.streaming.agents.common import (
+from .models.unity.model import UnitYModel
+from .streaming.agents.common import (
     AgentStates,
     NoUpdateTargetMixin,
 )

@@ -15,7 +15,7 @@ from fairseq2.models.wav2vec2.builder import Wav2Vec2Config
 from fairseq2.models.wav2vec2.loader import load_wav2vec2_config
 from fairseq2.models.wav2vec2.model import Wav2Vec2Model
 
-from seamless_communication.models.conformer_shaw.builder import (
+from .models.conformer_shaw.builder import (
     create_conformer_shaw_model,
 )
 

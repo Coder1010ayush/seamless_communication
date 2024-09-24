@@ -25,15 +25,15 @@ from fairseq2.typing import DataType, Device
 from torch import Tensor
 from tqdm import tqdm
 
-from seamless_communication.cli.eval_utils import (
+from .cli.eval_utils import (
     compute_quality_metrics,
 )
-from seamless_communication.cli.m4t.predict import (
+from .cli.m4t.predict import (
     add_inference_arguments,
     set_generation_opts,
 )
-from seamless_communication.models.unity import UnitYModel
-from seamless_communication.inference import (
+from .models.unity import UnitYModel
+from .inference import (
     BatchedSpeechOutput,
     Modality,
     SequenceGeneratorOptions,
@@ -65,7 +65,7 @@ class EvalContext:
 
     data_file: Path
     """The pathname of the test data file, TSV or manifest JSON."""
-    
+
     data_file_type: str
     """Type of data file, TSV or manifest JSON."""
 
@@ -117,7 +117,7 @@ def build_data_pipeline(
     ctx: EvalContext,
     text_tokenizer: TextTokenizer,
 ) -> DataPipeline:
-    
+
     if ctx.data_file_type == "TSV":
         with open(ctx.data_file, "r") as f:
             header = f.readline().strip("\n").split("\t")
@@ -125,7 +125,7 @@ def build_data_pipeline(
 
         format_tsv = StrSplitter(names=header)
         pipeline_builder = read_text(ctx.data_file, rtrim=True).skip(1).map(format_tsv)
-        
+
     elif ctx.data_file_type == "JSON":
         def format_json(line: str):
             example = json.loads(str(line))
@@ -135,13 +135,13 @@ def build_data_pipeline(
                 "audio": example["source"]["audio_local_path"],
                 "tgt_text": example["target"]["text"],
             }
-        
+
         with open(ctx.data_file, "r") as f:
             header = list(format_json(f.readline()).keys())
             first_example = list(format_json(f.readline()).values())
-            
+
         pipeline_builder = read_text(ctx.data_file, rtrim=True).map(format_json)
-        
+
     else:
         raise NotImplementedError
 
@@ -249,7 +249,7 @@ def run_eval(
     translator: Translator,
     ctx: EvalContext,
     whisper_model_name: str,
-    n_samples = None
+    n_samples=None
 ) -> None:
     pipeline = build_data_pipeline(ctx, translator.text_tokenizer)
 
@@ -362,9 +362,9 @@ def run_eval(
     )
 
 
-def load_checkpoint(model: UnitYModel, path: str, device = torch.device("cpu")) -> None:
+def load_checkpoint(model: UnitYModel, path: str, device=torch.device("cpu")) -> None:
     saved_model = torch.load(path, map_location=device)["model"]
-    saved_model = { k.replace("model.", ""): v for k, v in saved_model.items() }
+    saved_model = {k.replace("model.", ""): v for k, v in saved_model.items()}
 
     def _select_keys(state_dict: Dict[str, Any], prefix: str) -> Dict[str, Any]:
         return {key.replace(prefix, ""): value for key, value in state_dict.items() if key.startswith(prefix)}
@@ -387,13 +387,13 @@ def main(optional_args: Optional[Dict[str, Any]] = None) -> None:
         description="M4T evaluation for tasks supported by Translator."
     )
     parser.add_argument(
-        "--data_file", 
-        type=str, 
+        "--data_file",
+        type=str,
         help="Data file to be evaluated, either TSV file or manifest JSON file."
         "Format of the manifest JSON file should be that as produced by `m4t_prepare_dataset`"
     )
     parser.add_argument(
-        "--load_checkpoint", 
+        "--load_checkpoint",
         type=str,
         help="Load a local Checkpoint",
         default=None
@@ -443,24 +443,24 @@ def main(optional_args: Optional[Dict[str, Any]] = None) -> None:
 
     assert args.data_file and args.task and args.tgt_lang and args.output_path, \
         "Please provide required arguments for evaluation - data_file, task, tgt_lang"
-        
+
     assert Path(args.data_file).exists(), \
         f"Invalid `data_file`: {args.data_file} does not exist"
-        
+
     if Path(args.data_file).suffix == ".tsv":
         data_type = "TSV"
     elif Path(args.data_file).suffix == ".json":
         data_type = "JSON"
     else:
         raise ValueError("Unable to recognize file type! Please use a data_file with either .tsv or .json extension.")
-    
+
     input_modality, output_modality = Translator.get_modalities_from_task_str(args.task)
 
     if input_modality == Modality.SPEECH and not Path(args.audio_root_dir).exists():
         raise ValueError(
             f"Invalid audio_root_dir: {args.audio_root_dir} for speech input."
         )
-    
+
     device = torch.device(args.device)
     dtype = torch.float16 if device.type == "cuda" else torch.float32
 
@@ -474,7 +474,7 @@ def main(optional_args: Optional[Dict[str, Any]] = None) -> None:
         input_modality=input_modality,
         output_modality=output_modality,
     )
-    
+
     if args.load_checkpoint:
         load_checkpoint(translator.model, path=args.load_checkpoint, device=device)
 

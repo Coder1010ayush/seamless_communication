@@ -4,6 +4,8 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 from __future__ import annotations
+from simuleval.agents.actions import Action
+from simuleval.data.segments import Segment
 import copy
 
 import logging
@@ -11,14 +13,12 @@ from argparse import ArgumentParser, Namespace
 from typing import Dict, Any
 
 from simuleval.agents import TextToSpeechAgent
-from seamless_communication.streaming.agents.common import AgentStates
-from simuleval.data.segments import Segment
-from simuleval.agents.actions import Action
+from .streaming.agents.common import AgentStates
 
-from seamless_communication.streaming.agents.pretssel_vocoder import (
+from .streaming.agents.pretssel_vocoder import (
     PretsselVocoderAgent,
 )
-from seamless_communication.streaming.agents.online_vocoder import VocoderAgent
+from .streaming.agents.online_vocoder import VocoderAgent
 
 logging.basicConfig(
     level=logging.INFO,

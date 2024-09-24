@@ -19,7 +19,7 @@ from fairseq2.typing import DataType, Device, finaloverride
 from torch import Tensor
 from torch.nn import Dropout, Module
 
-from seamless_communication.models.monotonic_decoder.p_choose import PChooseLayer
+from .models.monotonic_decoder.p_choose import PChooseLayer
 
 
 @final

@@ -42,8 +42,8 @@ To utilize Demucs for denoising audio, instantiate the Transcriber class and opt
 
 ```
 import torch
-from seamless_communication.inference import Transcriber
-from seamless_communication.denoise.demucs import DenoisingConfig
+from.inference import Transcriber
+from.denoise.demucs import DenoisingConfig
 
 model_name = "seamlessM4T_v2_large"
 vocoder_name = "vocoder_v2" if model_name == "seamlessM4T_v2_large" else "vocoder_36langs"
@@ -78,7 +78,7 @@ pause_length_sec determines the duration of silence between segments and has a d
 
 ```
 import torch
-from seamless_communication.inference import Transcriber
+from.inference import Transcriber
 
 model_name = "seamlessM4T_v2_large"
 vocoder_name = "vocoder_v2" if model_name == "seamlessM4T_v2_large" else "vocoder_36langs"

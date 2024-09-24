@@ -17,7 +17,7 @@ from fairseq2.data.audio import WaveformToFbankConverter, WaveformToFbankInput
 from simuleval.agents import SpeechToSpeechAgent
 from simuleval.agents.actions import Action, ReadAction, WriteAction
 from simuleval.data.segments import Segment, SpeechSegment
-from seamless_communication.streaming.agents.common import AgentStates
+from .streaming.agents.common import AgentStates
 
 
 SHIFT_SIZE = 10
@@ -128,7 +128,7 @@ class OnlineFeatureExtractorAgent(SpeechToSpeechAgent):  # type: ignore
 
         input_samples = samples[:effective_num_samples]
         states.previous_residual_samples = samples[
-            num_frames * self.num_samples_per_shift :
+            num_frames * self.num_samples_per_shift:
         ]
 
         data: WaveformToFbankInput = {

@@ -4,6 +4,12 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
+from .streamable import (
+    StreamableConv1d,
+    StreamableConvTranspose1d,
+    StreamableLSTM,
+    StreamableResnetBlock,
+)
 from typing import Any, Dict, List, Literal, Optional, Tuple
 
 import torch
@@ -28,21 +34,15 @@ from torch.nn import (
 )
 from torch.nn.utils.weight_norm import remove_weight_norm, weight_norm
 
-from seamless_communication.models.generator.ecapa_tdnn import ECAPA_TDNN
-from seamless_communication.models.unity.fft_decoder import FeedForwardTransformer
-from seamless_communication.models.unity.length_regulator import VarianceAdaptor
-from seamless_communication.models.vocoder.hifigan import (
+from .models.generator.ecapa_tdnn import ECAPA_TDNN
+from .models.unity.fft_decoder import FeedForwardTransformer
+from .models.unity.length_regulator import VarianceAdaptor
+from .models.vocoder.hifigan import (
     LRELU_SLOPE,
     ResBlock,
     init_weights,
 )
 
-from .streamable import (
-    StreamableConv1d,
-    StreamableConvTranspose1d,
-    StreamableLSTM,
-    StreamableResnetBlock,
-)
 
 ELU_PARAMS: Dict[str, Any] = {"alpha": 1.0}
 
@@ -399,7 +399,7 @@ class PretsselVocoder(Module):
                 )
             )
         )
-        self.layers.extend(stream_layers[stream_idx : stream_idx + chunk_size])  # noqa
+        self.layers.extend(stream_layers[stream_idx: stream_idx + chunk_size])  # noqa
         stream_idx += chunk_size
 
         self.num_kernels = len(resblock_kernel_sizes)
@@ -423,7 +423,7 @@ class PretsselVocoder(Module):
             )
         ups.apply(init_weights)
         self.layers.extend(ups)
-        self.layers.extend(stream_layers[stream_idx : stream_idx + chunk_size])  # noqa
+        self.layers.extend(stream_layers[stream_idx: stream_idx + chunk_size])  # noqa
         stream_idx += chunk_size
 
         for i in range(self.num_upsamples):

@@ -5,6 +5,11 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
+from utils import LANGUAGE_CODE_TO_NAME
+from typing import Tuple
+from huggingface_hub import snapshot_download
+from fairseq2.memory import MemoryBlock
+from fairseq2.generation import NGramRepeatBlockProcessor
 import os
 import pathlib
 import tempfile
@@ -20,19 +25,14 @@ from fairseq2.data.audio import (
     WaveformToFbankOutput,
 )
 
-from seamless_communication.inference import SequenceGeneratorOptions
-from fairseq2.generation import NGramRepeatBlockProcessor
-from fairseq2.memory import MemoryBlock
-from huggingface_hub import snapshot_download
-from seamless_communication.inference import Translator, SequenceGeneratorOptions
-from seamless_communication.models.unity import (
+from .inference import SequenceGeneratorOptions
+from .inference import Translator, SequenceGeneratorOptions
+from .models.unity import (
     load_gcmvn_stats,
     load_unity_unit_tokenizer,
 )
-from seamless_communication.cli.expressivity.predict.pretssel_generator import PretsselGenerator
+from .cli.expressivity.predict.pretssel_generator import PretsselGenerator
 
-from typing import Tuple
-from utils import LANGUAGE_CODE_TO_NAME
 
 DESCRIPTION = """\
 # Seamless Expressive

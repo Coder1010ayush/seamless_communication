@@ -4,6 +4,10 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 from __future__ import annotations
+from torch import Tensor
+from simuleval.data.segments import Segment, TextSegment
+from simuleval.agents.actions import Action, ReadAction, WriteAction
+from simuleval.agents import GenericAgent
 
 from argparse import ArgumentParser, Namespace
 from dataclasses import dataclass
@@ -12,15 +16,11 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 import torch
 from fairseq2.models.nllb.tokenizer import NllbTokenizer
 from fairseq2.nn.incremental_state import IncrementalStateBag
-from seamless_communication.models.monotonic_decoder import (
+from .models.monotonic_decoder import (
     MonotonicDecoderConfig,
     MonotonicDecoderModel,
 )
-from seamless_communication.streaming.agents.common import AgentStates
-from simuleval.agents import GenericAgent
-from simuleval.agents.actions import Action, ReadAction, WriteAction
-from simuleval.data.segments import Segment, TextSegment
-from torch import Tensor
+from .streaming.agents.common import AgentStates
 
 
 class DecoderAgentStates(AgentStates):  # type: ignore
@@ -234,11 +234,11 @@ class MMATextDecoderAgent(OnlineTextDecoderAgent):  # type: ignore
         p_choose = p_choose.view(self.num_decoder_layers, -1, tgt_len, src_len)
 
         if self.decision_method == "min":
-            prob = p_choose[self.p_choose_start_layer :, :, -1, -1].min().item()
+            prob = p_choose[self.p_choose_start_layer:, :, -1, -1].min().item()
         elif self.decision_method == "mean":
-            prob = p_choose[self.p_choose_start_layer :, :, -1, -1].mean().item()
+            prob = p_choose[self.p_choose_start_layer:, :, -1, -1].mean().item()
         else:
-            prob = p_choose[self.p_choose_start_layer :, :, -1, -1].median().item()
+            prob = p_choose[self.p_choose_start_layer:, :, -1, -1].median().item()
 
         return index, prob, decoder_output
 

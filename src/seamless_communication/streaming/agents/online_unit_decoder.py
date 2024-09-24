@@ -4,20 +4,20 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 from __future__ import annotations
+from simuleval.data.segments import Segment, TextSegment
+from simuleval.agents.actions import Action, ReadAction, WriteAction
+from simuleval.agents import GenericAgent
 
 from argparse import ArgumentParser, Namespace
 from typing import Any, List, Optional
 
 import torch
-from seamless_communication.models.unity.model import UnitYModel, UnitYNART2UModel
-from seamless_communication.models.unity.unit_tokenizer import UnitTokenizer
-from seamless_communication.streaming.agents.online_text_decoder import (
+from .models.unity.model import UnitYModel, UnitYNART2UModel
+from .models.unity.unit_tokenizer import UnitTokenizer
+from .streaming.agents.online_text_decoder import (
     UnitYTextDecoderOutput,
 )
-from seamless_communication.streaming.agents.common import AgentStates
-from simuleval.agents import GenericAgent
-from simuleval.agents.actions import Action, ReadAction, WriteAction
-from simuleval.data.segments import Segment, TextSegment
+from .streaming.agents.common import AgentStates
 
 
 class NARUnitDecoderAgentStates(AgentStates):  # type: ignore
@@ -112,14 +112,14 @@ class NARUnitYUnitDecoderAgent(GenericAgent):  # type: ignore
 
         if states.source_finished and states.duration_start_index > 0:
             # We have to consider one more word for EOS, because we append an EOS at the end.
-            if sum(durations[states.duration_start_index :]) == 0:
+            if sum(durations[states.duration_start_index:]) == 0:
                 # If you reach here, it means that the last source token is a silence token (e.g. punctuations)
                 # In that case no need to consider one more token.
                 return WriteAction("", finished=True)
             else:
                 states.duration_start_index = max(states.duration_start_index - 1, 0)
 
-        current_duration = sum(durations[states.duration_start_index :])
+        current_duration = sum(durations[states.duration_start_index:])
 
         if current_duration < self.min_unit_chunk_size:
             if not states.source_finished:

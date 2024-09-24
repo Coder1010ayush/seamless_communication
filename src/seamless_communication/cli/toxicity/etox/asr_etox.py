@@ -4,28 +4,27 @@
 # This source code is licensed under the license found in the
 # MIT_LICENSE file in the root directory of this source tree.
 
+import logging
+from whisper.model import Whisper
+from fairseq2.typing import DataType, Device
+from fairseq2.data.text import StrSplitter, read_text
+from fairseq2.data.audio import AudioDecoder, WaveformToFbankConverter
+from fairseq2.data import Collater, DataPipeline, FileMapper
+from pathlib import Path
+import torch
 import argparse
 import tempfile
 import typing as tp
 import torchaudio
 from tqdm import tqdm
-from seamless_communication.cli.eval_utils.compute_metrics import init_whisper_model
-from seamless_communication.cli.eval_utils.lang_mapping import LANG3_LANG2
-from seamless_communication.inference.translator import Modality
-import torch
+from .cli.eval_utils.compute_metrics import init_whisper_model
+from .cli.eval_utils.lang_mapping import LANG3_LANG2
+from .inference.translator import Modality
 
-from pathlib import Path
-from seamless_communication.inference import Translator
-from fairseq2.data import Collater, DataPipeline, FileMapper
-from fairseq2.data.audio import AudioDecoder, WaveformToFbankConverter
-from fairseq2.data.text import StrSplitter, read_text
-from fairseq2.typing import DataType, Device
+from .inference import Translator
 
-from seamless_communication.toxicity import load_etox_bad_word_checker
+from .toxicity import load_etox_bad_word_checker
 
-from whisper.model import Whisper
-
-import logging
 
 logging.basicConfig(
     level=logging.INFO,

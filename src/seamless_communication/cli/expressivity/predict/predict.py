@@ -13,19 +13,19 @@ from pathlib import Path
 from fairseq2.data import SequenceData
 from fairseq2.data.audio import WaveformToFbankConverter
 
-from seamless_communication.cli.expressivity.predict.pretssel_generator import (
+from .cli.expressivity.predict.pretssel_generator import (
     PretsselGenerator,
 )
-from seamless_communication.cli.m4t.predict import (
+from .cli.m4t.predict import (
     add_inference_arguments,
     set_generation_opts,
 )
-from seamless_communication.inference import Translator
-from seamless_communication.models.unity import (
+from .inference import Translator
+from .models.unity import (
     load_gcmvn_stats,
     load_unity_unit_tokenizer,
 )
-from seamless_communication.store import add_gated_assets
+from .store import add_gated_assets
 
 
 AUDIO_SAMPLE_RATE = 16000
@@ -69,10 +69,10 @@ def main() -> None:
         raise Exception(
             "--tgt_lang, --output_path must be provided for SeamlessExpressive inference."
         )
-        
+
     if args.gated_model_dir:
         add_gated_assets(args.gated_model_dir)
-    
+
     if torch.cuda.is_available():
         device = torch.device("cuda:0")
         dtype = torch.float16
@@ -83,7 +83,7 @@ def main() -> None:
     logger.info(f"Running inference on {device=} with {dtype=}.")
 
     unit_tokenizer = load_unity_unit_tokenizer(args.model_name)
-    
+
     translator = Translator(
         args.model_name,
         vocoder_name_or_card=None,
